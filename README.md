@@ -9,6 +9,13 @@ API ini memungkinkan pengguna untuk mengelola distribusi hasil donasi yang didap
 ```text
 https://kuliah2025.my.id/modul.3_distributions/
 ```
+## Text Header
+Header disini perlu mengambil token dari login admin atau volunter dari kelompok 1.
+berikut cara dokumentasi untuk mengambil token admin dan volunter dari proses login yang di gunakan sebagai header. 
+akses link yang telah di sediakan sebagai berikut https://github.com/Rieko00/DonationAPI-Auth.
+Header ini menggunakan authorization bearer "token" .
+
+
 ## ERD 
 ![Diagram Tanpa Judul drawio (1)](https://github.com/user-attachments/assets/b2a140e0-1019-481e-9019-79360cfaca56)
 
@@ -218,7 +225,7 @@ Dari Gamabar ERD di atas dokumentasi penerima dan distribusi
 
 #### 7. Mengambil Daftar Distribusi
 
-- **Method:**
+- **Method:** GET
 - **Path:** `/distributions.php?donasi_id=50`
 
 ##### Response Success
@@ -257,9 +264,16 @@ Dari Gamabar ERD di atas dokumentasi penerima dan distribusi
 
 #### 8. Mengupdate Status Distribusi
 
-- **Method:**
+- **Method:** PUT
 - **Path:** `/distributions.php`
 
+##### Reequest Body
+```json
+{
+  "distribution_id": 7,
+  "status": "diterima" 
+}
+```
 ##### Response Success
 
 - **Status Code:** 200 OK
