@@ -9,6 +9,14 @@ API ini memungkinkan pengguna untuk mengelola distribusi hasil donasi yang didap
 ```text
 https://kuliah2025.my.id/modul.3_distributions/
 ```
+## ERD 
+![Diagram Tanpa Judul drawio (1)](https://github.com/user-attachments/assets/b2a140e0-1019-481e-9019-79360cfaca56)
+
+Dari Gamabar ERD di atas dokumentasi penerima dan distribusi 
+ - tabel donasi yang dimana akan menyimpan data pemberi donasi
+ - tabel distribusi : menampilkan jumlah donasi yang akan di terima, banyak nilai satuan ( rupiah, kilogram,dll), status ditribusi, dan pencatatan distribusi
+ - penerima donasi : menampilkan data penerima baik individu, lembaga, atau komunitas 
+
 
 ## Endpoints
 
@@ -273,3 +281,43 @@ https://kuliah2025.my.id/modul.3_distributions/
   "error": "distribution_id dan status wajib diisi"
 }
 ```
+## status code 
+
+| Status Code | Description                                  |
+|-------------|----------------------------------------------|
+| 200         | OK - Permintaan berhasil                     |
+| 201         | Created - Data berhasil dibuat               |
+| 400         | Bad Request - Parameter tidak valid/tidak lengkap |
+| 401         | Unauthorized - Autentikasi diperlukan        |
+| 403         | Forbidden - Tidak memiliki izin mengakses resource |
+| 404         | Not Found - Resource tidak ditemukan         |
+| 500         | Internal Server Error - Kesalahan pada server|
+
+##### Struktur Database
+TABEL: recipients
+
+| Field     | Type         | Description                          |
+|-----------|--------------|--------------------------------------|
+| id        | int(11)      | ID unik penerima (Primary Key)       |
+| nama      | varchar(255) | Nama lengkap penerima                |
+| alamat    | text         | Alamat lengkap penerima              |
+| is_active | tinyint(1)   | Status aktif (1=aktif, 0=nonaktif)   |
+
+TABEL: distributions
+| Field           | Type                          | Description                          |
+|-----------------|-------------------------------|--------------------------------------|
+| id              | int(11)                        | ID unik distribusi (Primary Key)     |
+| donasi_id       | int(11)                        | ID donasi terkait (Foreign Key)      |
+| recipient_id    | int(11)                        | ID penerima (Foreign Key)            |
+| amount_received | decimal(15,2)                  | Jumlah yang diterima                 |
+| unit            | varchar(10)                    | Satuan (rupiah/kg/liter/dll)         |
+| status          | enum('diproses','diterima')    | Status distribusi                    |
+| created_at      | timestamp                      | Waktu pencatatan distribusi          |
+
+TABEL: donations
+| Field           | Type           | Description                              |
+|-----------------|----------------|------------------------------------------|
+| id              | int(11)        | ID unik donasi (Primary Key)             |
+| jumlah          | decimal(15,2)  | Nilai donasi                             |
+| donor_name      | varchar(255)   | Nama pendonor                            |
+| tanggal_donasi  | timestamp      | Waktu donasi dilakukan                   |
