@@ -13,7 +13,7 @@ https://kuliah2025.my.id/modul.3_distributions/
 Header disini perlu mengambil token dari login admin atau volunter dari kelompok 1.
 berikut cara dokumentasi untuk mengambil token admin dan volunter dari proses login yang di gunakan sebagai header. 
 akses link yang telah di sediakan sebagai berikut https://github.com/Rieko00/DonationAPI-Auth.
-Header ini menggunakan authorization bearer "token" .
+Header ini menggunakan authorization bearer "token" jadi harus melihat donasi _id dari tabel donasi yang sudah disiapkan modul 2
 
 
 ## ERD 
@@ -328,10 +328,3 @@ TABEL: distributions
 | status          | enum('diproses','diterima')    | Status distribusi                    |
 | created_at      | timestamp                      | Waktu pencatatan distribusi          |
 
-TABEL: donations
-| Field           | Type           | Description                              |
-|-----------------|----------------|------------------------------------------|
-| id              | int(11)        | ID unik donasi (Primary Key)             |
-| jumlah          | decimal(15,2)  | Nilai donasi                             |
-| donor_name      | varchar(255)   | Nama pendonor                            |
-| tanggal_donasi  | timestamp      | Waktu donasi dilakukan                   |
